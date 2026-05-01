@@ -83,7 +83,7 @@ def process_single_task(pair, action_choice):
     try:
         merge_pair(pair['l'], pair['r'], pair['output'])
         
-        # Cleanup happens instantly inside the thread upon success
+        # Cleanup inside the thread upon success
         if action_choice == "delete":
             for path in (pair["l"], pair["r"]):
                 try:
@@ -129,7 +129,7 @@ def write_report(root, merged, skipped, orphans, errors):
 def main():
     folder = os.getcwd()
     
-    # Keeping this set to delete so you don't max out your storage
+    # change if u wnat to keep old files for some reason
     ACTION_CHOICE = "delete" 
 
     print(f"Scanning directory: {folder}")
@@ -144,7 +144,7 @@ def main():
 
     print(f"Found {len(pairs)} pairs. Hammering the disk with multiple threads now...\n")
 
-    # Blast the tasks across available CPU threads
+    # threading
     with concurrent.futures.ThreadPoolExecutor() as executor:
         # Submit all tasks
         future_to_pair = {executor.submit(process_single_task, pair, ACTION_CHOICE): pair for pair in pairs}
