@@ -142,7 +142,7 @@ def main():
 
     merged, skipped, errors = [], [], []
 
-    print(f"Found {len(pairs)} pairs. Hammering the disk with multiple threads now...\n")
+    print(f"Found {len(pairs)} pairs. Merging now...\n")
 
     # threading
     with concurrent.futures.ThreadPoolExecutor() as executor:
